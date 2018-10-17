@@ -19,17 +19,17 @@ const jsonParser = bodyParser.json();
 const app = express();
 app.use(morgan('common'));
 
-/*
- 
- const app = express();
+
+ //const app = express();
 
  const PORT = process.env.PORT || 3000;
 
+ /*
  app.get('/api/*', (req, res) => {
    res.json({ok: true});
  });
 
- app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+
 
  module.exports = {app};*/
 
@@ -118,25 +118,25 @@ app.put('/put/:newId', jsonParser, (req, res) => {
     .catch(err => res.status(500).json({ message: 'Something went wrong' }));
 });
 
-
+ //app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 let server;
 
-function runServer(DATABASE_URL, port = PORT) {
+function runServer() {
 
   return new Promise((resolve, reject) => {
-    mongoose.connect(DATABASE_URL, err => {
+    app.listen(PORT, err => {
       if (err) {
         return reject(err);
 
       }
-      server = app.listen(port, () => {
-        console.log(`Your app is listening on port ${port}`);
-        resolve();
-      })
-        .on('error', err => {
-          mongoose.disconnect();
-          reject(err);
-        });
+      //server = app.listen(port, () => {
+        //console.log(`Your app is listening on port ${port}`);
+        //();
+      //})
+        //.on('error', err => {
+         // mongoose.disconnect();
+         // reject(err);
+        //});
     });
   });
 }
@@ -159,7 +159,7 @@ function closeServer() {
 // if server.js is called directly (aka, with `node server.js`), this block
 // runs. but we also export the runServer command so other code (for instance, test code) can start the server as needed.
 if (require.main === module) {
-  runServer(DATABASE_URL).catch(err => console.error(err));
+  runServer();
 }
 
-module.exports = { runServer, app, closeServer };
+module.exports = { runServer, app, /*closeServer*/ };
