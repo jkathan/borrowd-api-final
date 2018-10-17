@@ -12,13 +12,19 @@ mongoose.Promise = global.Promise;
 //require('dotenv').config();
 const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
-
+const {CLIENT_ORIGIN} = require('./config');
 
 const jsonParser = bodyParser.json();
 
 const app = express();
 app.use(morgan('common'));
 
+
+app.use(
+    cors({
+        origin: CLIENT_ORIGIN
+    })
+);
 /*
  
  const app = express();
