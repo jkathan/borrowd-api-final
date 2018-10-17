@@ -120,10 +120,10 @@ app.put('/put/:newId', jsonParser, (req, res) => {
 
 let server;
 
-function runServer(DATABASE_URL, port = PORT) {
+function runServer(databaseUrl, port = PORT) {
 
   return new Promise((resolve, reject) => {
-    mongoose.connect(DATABASE_URL, err => {
+    mongoose.connect(databaseUrl, { useNewUrlParser: true }, err => {
       if (err) {
         return reject(err);
 
@@ -131,7 +131,7 @@ function runServer(DATABASE_URL, port = PORT) {
       server = app.listen(port, () => {
         console.log(`Your app is listening on port ${port}`);
         resolve();
-      }, { useNewUrlParser: true })
+      })
         .on('error', err => {
           mongoose.disconnect();
           reject(err);
@@ -161,4 +161,4 @@ if (require.main === module) {
   runServer(DATABASE_URL).catch(err => console.error(err));
 }
 
-module.exports = { runServer, app, closeServer };
+module.exports = { app, runServer,  closeServer };
