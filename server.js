@@ -123,7 +123,7 @@ let server;
 function runServer(DATABASE_URL, port = PORT) {
 
   return new Promise((resolve, reject) => {
-    mongoose.connect(DATABASE_URL, { useNewUrlParser: true }, err => {
+    mongoose.connect(DATABASE_URL, err => {
       if (err) {
         return reject(err);
 
@@ -131,7 +131,7 @@ function runServer(DATABASE_URL, port = PORT) {
       server = app.listen(port, () => {
         console.log(`Your app is listening on port ${port}`);
         resolve();
-      })
+      }, { useNewUrlParser: true })
         .on('error', err => {
           mongoose.disconnect();
           reject(err);
