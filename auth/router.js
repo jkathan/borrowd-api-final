@@ -3,7 +3,7 @@ const express = require('express');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-
+const {User} = require('../users/models');
 const config = require('../config');
 const router = express.Router();
 
@@ -23,6 +23,7 @@ router.post('/login', (req, res) => {
      User
 	.create({
 	username: req.body.username,
+	password: req.body.password
 	})
 	.then(user => res.status(200).json(user.serialize()))
   res.json();
