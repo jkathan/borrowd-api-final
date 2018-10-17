@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
-//const {DATABASE_URL, PORT} = require('./config');
+const {DATABASE_URL, PORT} = require('./config');
 const { Borrowd } = require('./models');
 //const { User } = require('./users/models');
 const passport = require('passport');
@@ -16,8 +16,8 @@ mongoose.Promise = global.Promise;
 
 const jsonParser = bodyParser.json();
 
-//const app = express();
-//app.use(morgan('common'));
+const app = express();
+app.use(morgan('common'));
 
 /*
  
