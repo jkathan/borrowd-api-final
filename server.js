@@ -9,9 +9,9 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 mongoose.Promise = global.Promise;
 //const { Borrowd } = require('./models');
-require('dotenv').config();
-const { router: usersRouter } = require('./users');
-const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+//require('dotenv').config();
+//const { router: usersRouter } = require('./users');
+//const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
 
 const jsonParser = bodyParser.json();
@@ -29,13 +29,13 @@ app.use(function (req, res, next) {
   next();
 });
 
-passport.use(localStrategy);
-passport.use(jwtStrategy);
+//passport.use(localStrategy);
+//passport.use(jwtStrategy);
 
-app.use('/api/users/', usersRouter);
-app.use('/api/auth/', authRouter);
+//app.use('/api/users/', usersRouter);
+//app.use('/api/auth/', authRouter);
 
-const jwtAuth = passport.authenticate('jwt', { session: false });
+//const jwtAuth = passport.authenticate('jwt', { session: false });
 
 
 
