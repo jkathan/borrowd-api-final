@@ -16,8 +16,8 @@ mongoose.Promise = global.Promise;
 
 const jsonParser = bodyParser.json();
 
-//const app = express();
-//app.use(morgan('common'));
+const app = express();
+app.use(morgan('common'));
 
 /*
  
