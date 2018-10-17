@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -18,4 +18,4 @@ borrowdSchema.methods.serialize = function() {
 
 const Borrowd = mongoose.model('Borrowd', borrowdSchema);
 
-module.exports = {Borrowd};
+module.exports = {Borrowd};*/

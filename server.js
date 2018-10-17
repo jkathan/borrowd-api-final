@@ -2,8 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const {DATABASE_URL, PORT} = require('./config');
-const { Borrowd } = require('./models');
+//const {DATABASE_URL, PORT} = require('./config');
+//const { Borrowd } = require('./models');
 //const { User } = require('./users/models');
 const passport = require('passport');
 const bodyParser = require('body-parser');
@@ -16,9 +16,22 @@ mongoose.Promise = global.Promise;
 
 const jsonParser = bodyParser.json();
 
-const app = express();
-app.use(morgan('common'));
+//const app = express();
+//app.use(morgan('common'));
 
+ const express = require('express');
+ const app = express();
+
+ const PORT = process.env.PORT || 3000;
+
+ app.get('/api/*', (req, res) => {
+   res.json({ok: true});
+ });
+
+ app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+
+ module.exports = {app};
+/*
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
@@ -68,7 +81,7 @@ app.get('/api/user', (req, res) => {
       res.status(500).json({ error: 'something went terribly wrong' });
     });
 });
-*/
+
 
 app.post('/post', jsonParser, (req, res) => {
   const requiredFields = ['board', 'newId'];
@@ -110,7 +123,7 @@ let server;
 function runServer(DATABASE_URL, port = PORT) {
 
   return new Promise((resolve, reject) => {
-    mongoose.connect(DATABASE_URL, { useNewUrlParser: true }, err => {
+    mongoose.connect(DATABASE_URL, err => {
       if (err) {
         return reject(err);
 
@@ -148,4 +161,4 @@ if (require.main === module) {
   runServer(DATABASE_URL).catch(err => console.error(err));
 }
 
-module.exports = { runServer, app, closeServer };
+module.exports = { runServer, app, closeServer };*/
