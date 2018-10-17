@@ -9,7 +9,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 mongoose.Promise = global.Promise;
 //const { Borrowd } = require('./models');
-require('dotenv').config();
+//require('dotenv').config();
 const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
