@@ -8,10 +8,10 @@ const { Borrowd } = require('./models');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 mongoose.Promise = global.Promise;
-//const { Borrowd } = require('./models');
-//require('dotenv').config();
-//const { router: usersRouter } = require('./users');
-//const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+const { Borrowd } = require('./models');
+require('dotenv').config();
+const { router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
 
 const jsonParser = bodyParser.json();
@@ -42,17 +42,17 @@ app.use(function (req, res, next) {
   next();
 });
 
-//passport.use(localStrategy);
-//passport.use(jwtStrategy);
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
-//app.use('/api/users/', usersRouter);
-//app.use('/api/auth/', authRouter);
+app.use('/api/users/', usersRouter);
+app.use('/api/auth/', authRouter);
 
-//const jwtAuth = passport.authenticate('jwt', { session: false });
+const jwtAuth = passport.authenticate('jwt', { session: false });
 
 
 
-app.get('/get', (req, res) => {
+app.get('/api/get', (req, res) => {
    Borrowd
    .find() //will need to do findOne({userid})
    .then(board => {res.json(board)})
@@ -62,7 +62,7 @@ app.get('/get', (req, res) => {
     });
 });
 
-app.get('/get/:newId', (req, res) => {
+app.get('/api/get/:newId', (req, res) => {
    Borrowd
    .findOne({newId: req.params.newId}) //will need to do findOne({userid})
    .then(board => {res.json(board)})
@@ -83,7 +83,7 @@ app.get('/api/user', (req, res) => {
 });*/
 
 
-app.post('/post', jsonParser, (req, res) => {
+app.post('/api/post', jsonParser, (req, res) => {
   const requiredFields = ['board', 'newId'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -102,7 +102,7 @@ app.post('/post', jsonParser, (req, res) => {
 	.then(borrowd => res.status(200).json(borrowd.serialize()))
 });
 
-app.put('/put/:newId', jsonParser, (req, res) => {
+app.put('/api/put/:newId', jsonParser, (req, res) => {
   const updated = {};
   const updateableFields = ['board'];
   updateableFields.forEach(field => {
