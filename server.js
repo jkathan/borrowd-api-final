@@ -49,14 +49,14 @@ app.use(function (req, res, next) {
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-app.use('/api/users/', usersRouter);
-app.use('/api/auth/', authRouter);
+app.use('/users/', usersRouter);
+app.use('/auth/', authRouter);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
 
 
-app.get('/api/get', (req, res) => {
+app.get('/get', (req, res) => {
    Borrowd
    .find() //will need to do findOne({userid})
    .then(board => {res.json(board)})
@@ -66,7 +66,7 @@ app.get('/api/get', (req, res) => {
     });
 });
 
-app.get('/api/get/:newId', (req, res) => {
+app.get('/get/:newId', (req, res) => {
    Borrowd
    .findOne({newId: req.params.newId}) //will need to do findOne({userid})
    .then(board => {res.json(board)})
@@ -87,7 +87,7 @@ app.get('/api/user', (req, res) => {
 });*/
 
 
-app.post('/api/post', jsonParser, (req, res) => {
+app.post('/post', jsonParser, (req, res) => {
   const requiredFields = ['board', 'newId'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -106,7 +106,7 @@ app.post('/api/post', jsonParser, (req, res) => {
 	.then(borrowd => res.status(200).json(borrowd.serialize()))
 });
 
-app.put('/api/put/:newId', jsonParser, (req, res) => {
+app.put('/put/:newId', jsonParser, (req, res) => {
   const updated = {};
   const updateableFields = ['board'];
   updateableFields.forEach(field => {
