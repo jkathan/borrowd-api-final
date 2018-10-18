@@ -140,4 +140,4 @@ router.post('/', jsonParser, (req, res) => {
 // verify this in the Mongo shell.
 
 
-module.exports = {router};*/
+module.exports = {router};
