@@ -18,8 +18,8 @@ const createAuthToken = function(user) {
 const localAuth = passport.authenticate('local', {session: false});
 router.use(bodyParser.json());
 // The user provides a username and password to login
-router.get('/login', localAuth, (req, res) => {
-   users
+router.get('/login/:username', localAuth, (req, res) => {
+   User
    .findOne({username: req.params.username})
    .then(res => res.json())
    .catch(err => {
