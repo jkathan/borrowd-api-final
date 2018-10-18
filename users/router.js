@@ -139,6 +139,7 @@ router.post('/', jsonParser, (req, res) => {
 // if we're creating users. keep in mind, you can also
 // verify this in the Mongo shell.
 router.get('/', (req, res) => {
+  console.log(res)
   return User.find()
     .then(users => res.json(users.map(user => user.serialize())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
