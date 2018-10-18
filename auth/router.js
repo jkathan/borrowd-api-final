@@ -21,7 +21,6 @@ router.use(bodyParser.json());
 router.get('/login/:username', (req, res) => {
    User
    .findOne({username: req.params.username})
-   .then(res => res.json())
    .catch(err => {
       console.error(err);
       res.status(500).json({ error: 'something went terribly wrong' });
