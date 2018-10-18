@@ -18,9 +18,14 @@ const createAuthToken = function(user) {
 const localAuth = passport.authenticate('local', {session: false});
 router.use(bodyParser.json());
 // The user provides a username and password to login
-router.post('/login', localAuth, (req, res) => {
-  const authToken = createAuthToken(req.user.serialize());
-  res.json({authToken});
+router.get('/login', localAuth, (req, res) => {
+   users
+   .findOne({username: req.params.username})
+   .then(res => res.json())
+   .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'something went terribly wrong' });
+    });
 });
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
