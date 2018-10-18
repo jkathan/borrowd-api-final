@@ -86,6 +86,7 @@ app.get('/api/user', (req, res) => {
     });
 });
 
+
 app.post('/api/post', jsonParser, (req, res) => {
   const requiredFields = ['board', 'newId'];
   for (let i = 0; i < requiredFields.length; i++) {
