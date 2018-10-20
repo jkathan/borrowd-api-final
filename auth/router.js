@@ -19,3 +19,5 @@ router.get('/login/:username', (req, res) => {
       res.status(500).json({ error: 'something went terribly wrong' });
     });
 });
+
+module.exports = {router};
