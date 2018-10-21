@@ -59,7 +59,8 @@ const jwtAuth = passport.authenticate('jwt', { session: false });
 app.get('/get', (req, res) => {
    Borrowd
    .find() //will need to do findOne({userid})
-   .then(board => {res.json(board)})
+   .then(board => {console.log(board); res.json(board)})
+
    .catch(err => {
       console.error(err);
       res.status(500).json({ error: 'something went terribly wrong' });
@@ -97,7 +98,6 @@ app.post('/post', jsonParser, (req, res) => {
       return res.status(400).send(message);
     }
   }
-
    Borrowd
 	.create({
 	board: req.body.board,
